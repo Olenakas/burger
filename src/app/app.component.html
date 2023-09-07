@@ -1,0 +1,168 @@
+<section class="main">
+  <header class="header">
+    <div class="container">
+      <div class="logo">
+        <span class="logo-text">Bun & Bite</span>
+      </div>
+      <div class="menu-wrap">
+        <nav class="menu">
+          <ul class="menu-list">
+            <li class="menu-item">
+              <a (click)="scrollTo(why)">Why Choose Us</a>
+            </li>
+            <li class="menu-item">
+              <a (click)="scrollTo(products)">Burger Menu</a>
+            </li>
+            <li class="menu-item">
+              <a (click)="scrollTo(order)">Ordering Process</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="currency" title="Change currency" id="change-currency" (click)="changeCurrency()">{{currency}}</div>
+      </div>
+    </div>
+  </header>
+  <section class="container main-content">
+    <div class="container main-content-container">
+      <div class="main-info">
+        <h1 class="main-title"><span class="accent-color">#</span>Introducing our <span class="accent-color">seasonal burger</span>
+          update!</h1>
+        <p class="main-text">Taste is an art, and we continue to craft magnificent burger masterpieces for you. Our
+          burgers are not just dishes; they are genuine works of art, created with love and passion.</p>
+        <div class="main-action">
+          <button class="main-action-btn button" id="main-action-button" (click)="scrollTo(products)">
+            <p class="text-btn">View menu</p>
+            <span class="arrow-btn"><svg xmlns="http://www.w3.org/2000/svg" width="37" height="37" viewBox="0 0 37 37"                                         fill="none">
+                  <path d="M29 18.5L20 27.5ZM29 18.5L20 9.5ZM29 18.5H8Z" fill="white"/>
+                  <path d="M29 18.5L20 27.5M29 18.5L20 9.5M29 18.5H8" stroke="#191411" stroke-width="1.5"
+                        stroke-linecap="round" stroke-linejoin="round"/>
+            </svg></span>
+          </button>
+        </div>
+      </div>
+      <img src="./assets/images/main_burger.png" alt="Big burger" class="main-image">
+    </div>
+  </section>
+</section>
+<section class="why" id="why" #why>
+  <div class="container">
+    <div class="why-title common-title"><span class="accent-color">#</span>Why Choose Us?</div>
+    <ul class="why-items">
+      <li class="why-item-1">
+        <div class="why-img-title">
+          <img src="./assets/images/burger.png" alt="burger" class="why-item-image">
+          <h3 class="why-item-title">Signature Recipes</h3>
+        </div>
+        <div class="why-text-wrap">
+          <p class="why-item-text">Our burgers are true culinary masterpieces. Each one is crafted with a unique
+            combination of ingredients that have no equal. Our team of chefs carefully develops each recipe to surprise
+            and delight you from the very first bite.
+          </p>
+        </div>
+      </li>
+      <li class="why-item-2">
+        <div class="why-img-title">
+          <img src="./assets/images/meat.png" alt="meat" class="why-item-image">
+          <h3 class="why-item-title">Signature Recipes</h3>
+        </div>
+        <div class="why-text-wrap">
+          <p class="why-item-text why-item-text-1">Quality begins with our meticulous ingredient selection, and we never
+            make compromises.
+          </p>
+          <p class="why-item-text why-item-text-2">We exclusively use 100% marbled beef sourced directly from farmers
+            who share our passion for high-quality standards. You can rest assured that every piece of meat in our
+            burgers is top-notch. Your taste buds will thank you!
+          </p>
+        </div>
+      </li>
+      <li class="why-item-3">
+        <div class="why-img-title">
+          <img src="./assets/images/food%20truck.png" alt="food truck" class="why-item-image">
+          <h3 class="why-item-title">Signature Recipes</h3>
+        </div>
+        <div class="why-text-wrap">
+          <p class="why-item-text why-item-text-3">We understand that time is precious, <br> and we guarantee that your
+            order will be delivered to you swiftly and fresh. If we don't meet our delivery time commitment, it's on us
+            - delivery becomes absolutely free. We also pack our burgers with care to ensure they retain their flavor
+            and warmth until they reach your doorstep.
+          </p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+<section class="products" id="product" #products>
+  <div class="container">
+    <div class="products-title common-title"><span class="accent-color">#</span>Choose Your Burger</div>
+    <ul class="products-items">
+      <li class="products-item" *ngFor="let product of productsData">
+        <div class="products-item-image">
+          <img src="./assets/images/{{product.image}}" alt="burger">
+        </div>
+        <h4 class="products-item-title">{{product.title}}</h4>
+        <p class="products-item-text">{{product.text}}</p>
+        <div class="products-item-extra">
+          <div class="products-items-info">
+            <p class="products-item-price">{{currency}} {{product.price}} </p>
+            <p class="products-item-weight">{{product.grams}} g</p>
+          </div>
+          <div class="products-item-action">
+            <button class="button product-button" (click)="scrollTo(order, product) ">
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="49" viewBox="0 0 48 49" fill="none">
+                <path
+                  d="M36 26.4961H26V36.4961C26 37.0265 25.7893 37.5352 25.4142 37.9103C25.0391 38.2854 24.5304 38.4961 24 38.4961C23.4696 38.4961 22.9609 38.2854 22.5858 37.9103C22.2107 37.5352 22 37.0265 22 36.4961V26.4961H12C11.4696 26.4961 10.9609 26.2854 10.5858 25.9103C10.2107 25.5352 10 25.0265 10 24.4961C10 23.9657 10.2107 23.457 10.5858 23.0819C10.9609 22.7068 11.4696 22.4961 12 22.4961H22V12.4961C22 11.9657 22.2107 11.457 22.5858 11.0819C22.9609 10.7068 23.4696 10.4961 24 10.4961C24.5304 10.4961 25.0391 10.7068 25.4142 11.0819C25.7893 11.457 26 11.9657 26 12.4961V22.4961H36C36.5304 22.4961 37.0391 22.7068 37.4142 23.0819C37.7893 23.457 38 23.9657 38 24.4961C38 25.0265 37.7893 25.5352 37.4142 25.9103C37.0391 26.2854 36.5304 26.4961 36 26.4961Z"
+                  fill="white"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+<section class="order" id="order" #order>
+  <div class="container">
+    <div class="order-title common-title"><span class="accent-color">#</span>Ordering Made Easy</div>
+    <div class="order-content">
+      <div class="order-form">
+        <div class="order-form-text">Please fill out all the necessary information below, and our manager will get in
+          touch with you to confirm your order.
+        </div>
+        <div class="order-form-inputs" [formGroup]="form">
+          <div class="order-form-inputs-wrap">
+            <div class="order-form-input"
+                 [class]="{'error':form.get('order')?.invalid && (form.get('order')?.dirty || form.get('order')?.touched) }">
+              <input type="text" placeholder="Your order" id="burger" formControlName="order" readonly>
+            </div>
+            <div class="order-form-input"
+                 [class]="{'error':form.get('name')?.invalid && (form.get('name')?.dirty || form.get('name')?.touched) }">
+              <input type="text" placeholder="Full name" id="name" formControlName="name">
+            </div>
+            <div class="order-form-input"
+                 [class]="{'error':form.get('phone')?.invalid && (form.get('phone')?.dirty || form.get('phone')?.touched) }">
+              <input type="text" placeholder="Phone number" id="phone" formControlName="phone">
+            </div>
+          </div>
+          <div class="order-form-input"
+               [class]="{'error': form.get('message')?.invalid && (form.get('message')?.dirty || form.get('message')?.touched) }">
+            <textarea name="message" placeholder="Message" id="text-input" formControlName="message"></textarea>
+          </div>
+        </div>
+      </div>
+      <button class="order-btn" id="order-action" (click)="confirmOrder()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="190" height="191" viewBox="0 0 190 191" fill="none">
+          <path d="M47.5 150.917L150.417 48M150.417 48V146.8M150.417 48H51.6167" stroke="white" stroke-width="3"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</section>
+<footer class="footer">
+  <div class="container">
+    <div class="logo">
+      Bun & Bite
+    </div>
+    <div class="right">All rights reserved</div>
+  </div>
+</footer>
