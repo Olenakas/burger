@@ -1,168 +1,423 @@
-<section class="main">
-  <header class="header">
-    <div class="container">
-      <div class="logo">
-        <span class="logo-text">Bun & Bite</span>
-      </div>
-      <div class="menu-wrap">
-        <nav class="menu">
-          <ul class="menu-list">
-            <li class="menu-item">
-              <a (click)="scrollTo(why)">Why Choose Us</a>
-            </li>
-            <li class="menu-item">
-              <a (click)="scrollTo(products)">Burger Menu</a>
-            </li>
-            <li class="menu-item">
-              <a (click)="scrollTo(order)">Ordering Process</a>
-            </li>
-          </ul>
-        </nav>
-        <div class="currency" title="Change currency" id="change-currency" (click)="changeCurrency()">{{currency}}</div>
-      </div>
+<!-- Nav -->
+<nav class="nav" aria-label="Main">
+  <div class="container nav-inner">
+    <a class="logo" href="#" (click)="$event.preventDefault(); scrollTo(top)">BUN <span>&amp;</span> BITE</a>
+    <span class="city">Warsaw</span>
+    <div class="links" [class.open]="menuOpen">
+      <a href="#why" (click)="$event.preventDefault(); scrollTo(why)">Why us</a>
+      <a href="#menu" (click)="$event.preventDefault(); scrollTo(products)">Menu</a>
+      <a href="#build" (click)="$event.preventDefault(); scrollTo(build)">Build yours</a>
+      <a href="#how" (click)="$event.preventDefault(); scrollTo(how)">How it works</a>
+      <a href="#find" (click)="$event.preventDefault(); scrollTo(find)">Delivery</a>
     </div>
-  </header>
-  <section class="container main-content">
-    <div class="container main-content-container">
-      <div class="main-info">
-        <h1 class="main-title"><span class="accent-color">#</span>Introducing our <span class="accent-color">seasonal burger</span>
-          update!</h1>
-        <p class="main-text">Taste is an art, and we continue to craft magnificent burger masterpieces for you. Our
-          burgers are not just dishes; they are genuine works of art, created with love and passion.</p>
-        <div class="main-action">
-          <button class="main-action-btn button" id="main-action-button" (click)="scrollTo(products)">
-            <p class="text-btn">View menu</p>
-            <span class="arrow-btn"><svg xmlns="http://www.w3.org/2000/svg" width="37" height="37" viewBox="0 0 37 37"                                         fill="none">
-                  <path d="M29 18.5L20 27.5ZM29 18.5L20 9.5ZM29 18.5H8Z" fill="white"/>
-                  <path d="M29 18.5L20 27.5M29 18.5L20 9.5M29 18.5H8" stroke="#191411" stroke-width="1.5"
-                        stroke-linecap="round" stroke-linejoin="round"/>
-            </svg></span>
-          </button>
-        </div>
-      </div>
-      <img src="./assets/images/main_burger.png" alt="Big burger" class="main-image">
-    </div>
-  </section>
-</section>
-<section class="why" id="why" #why>
-  <div class="container">
-    <div class="why-title common-title"><span class="accent-color">#</span>Why Choose Us?</div>
-    <ul class="why-items">
-      <li class="why-item-1">
-        <div class="why-img-title">
-          <img src="./assets/images/burger.png" alt="burger" class="why-item-image">
-          <h3 class="why-item-title">Signature Recipes</h3>
-        </div>
-        <div class="why-text-wrap">
-          <p class="why-item-text">Our burgers are true culinary masterpieces. Each one is crafted with a unique
-            combination of ingredients that have no equal. Our team of chefs carefully develops each recipe to surprise
-            and delight you from the very first bite.
-          </p>
-        </div>
-      </li>
-      <li class="why-item-2">
-        <div class="why-img-title">
-          <img src="./assets/images/meat.png" alt="meat" class="why-item-image">
-          <h3 class="why-item-title">Signature Recipes</h3>
-        </div>
-        <div class="why-text-wrap">
-          <p class="why-item-text why-item-text-1">Quality begins with our meticulous ingredient selection, and we never
-            make compromises.
-          </p>
-          <p class="why-item-text why-item-text-2">We exclusively use 100% marbled beef sourced directly from farmers
-            who share our passion for high-quality standards. You can rest assured that every piece of meat in our
-            burgers is top-notch. Your taste buds will thank you!
-          </p>
-        </div>
-      </li>
-      <li class="why-item-3">
-        <div class="why-img-title">
-          <img src="./assets/images/food%20truck.png" alt="food truck" class="why-item-image">
-          <h3 class="why-item-title">Signature Recipes</h3>
-        </div>
-        <div class="why-text-wrap">
-          <p class="why-item-text why-item-text-3">We understand that time is precious, <br> and we guarantee that your
-            order will be delivered to you swiftly and fresh. If we don't meet our delivery time commitment, it's on us
-            - delivery becomes absolutely free. We also pack our burgers with care to ensure they retain their flavor
-            and warmth until they reach your doorstep.
-          </p>
-        </div>
-      </li>
-    </ul>
+    <button class="cart-btn" type="button" (click)="cartOpen = true" aria-label="Open cart">
+      Cart <span class="cart-n">{{cartCount}}</span>
+    </button>
+    <button class="burger-btn" type="button" (click)="menuOpen = !menuOpen" [attr.aria-expanded]="menuOpen"
+            aria-label="Menu">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+        <path *ngIf="!menuOpen" d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <path *ngIf="menuOpen" d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
   </div>
-</section>
-<section class="products" id="product" #products>
-  <div class="container">
-    <div class="products-title common-title"><span class="accent-color">#</span>Choose Your Burger</div>
-    <ul class="products-items">
-      <li class="products-item" *ngFor="let product of productsData">
-        <div class="products-item-image">
-          <img src="./assets/images/{{product.image}}" alt="burger">
-        </div>
-        <h4 class="products-item-title">{{product.title}}</h4>
-        <p class="products-item-text">{{product.text}}</p>
-        <div class="products-item-extra">
-          <div class="products-items-info">
-            <p class="products-item-price">{{currency}} {{product.price}} </p>
-            <p class="products-item-weight">{{product.grams}} g</p>
-          </div>
-          <div class="products-item-action">
-            <button class="button product-button" (click)="scrollTo(order, product) ">
-              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="49" viewBox="0 0 48 49" fill="none">
-                <path
-                  d="M36 26.4961H26V36.4961C26 37.0265 25.7893 37.5352 25.4142 37.9103C25.0391 38.2854 24.5304 38.4961 24 38.4961C23.4696 38.4961 22.9609 38.2854 22.5858 37.9103C22.2107 37.5352 22 37.0265 22 36.4961V26.4961H12C11.4696 26.4961 10.9609 26.2854 10.5858 25.9103C10.2107 25.5352 10 25.0265 10 24.4961C10 23.9657 10.2107 23.457 10.5858 23.0819C10.9609 22.7068 11.4696 22.4961 12 22.4961H22V12.4961C22 11.9657 22.2107 11.457 22.5858 11.0819C22.9609 10.7068 23.4696 10.4961 24 10.4961C24.5304 10.4961 25.0391 10.7068 25.4142 11.0819C25.7893 11.457 26 11.9657 26 12.4961V22.4961H36C36.5304 22.4961 37.0391 22.7068 37.4142 23.0819C37.7893 23.457 38 23.9657 38 24.4961C38 25.0265 37.7893 25.5352 37.4142 25.9103C37.0391 26.2854 36.5304 26.4961 36 26.4961Z"
-                  fill="white"/>
-              </svg>
-            </button>
-          </div>
-        </div>
-      </li>
-    </ul>
-  </div>
-</section>
-<section class="order" id="order" #order>
-  <div class="container">
-    <div class="order-title common-title"><span class="accent-color">#</span>Ordering Made Easy</div>
-    <div class="order-content">
-      <div class="order-form">
-        <div class="order-form-text">Please fill out all the necessary information below, and our manager will get in
-          touch with you to confirm your order.
-        </div>
-        <div class="order-form-inputs" [formGroup]="form">
-          <div class="order-form-inputs-wrap">
-            <div class="order-form-input"
-                 [class]="{'error':form.get('order')?.invalid && (form.get('order')?.dirty || form.get('order')?.touched) }">
-              <input type="text" placeholder="Your order" id="burger" formControlName="order" readonly>
-            </div>
-            <div class="order-form-input"
-                 [class]="{'error':form.get('name')?.invalid && (form.get('name')?.dirty || form.get('name')?.touched) }">
-              <input type="text" placeholder="Full name" id="name" formControlName="name">
-            </div>
-            <div class="order-form-input"
-                 [class]="{'error':form.get('phone')?.invalid && (form.get('phone')?.dirty || form.get('phone')?.touched) }">
-              <input type="text" placeholder="Phone number" id="phone" formControlName="phone">
-            </div>
-          </div>
-          <div class="order-form-input"
-               [class]="{'error': form.get('message')?.invalid && (form.get('message')?.dirty || form.get('message')?.touched) }">
-            <textarea name="message" placeholder="Message" id="text-input" formControlName="message"></textarea>
-          </div>
-        </div>
-      </div>
-      <button class="order-btn" id="order-action" (click)="confirmOrder()">
-        <svg xmlns="http://www.w3.org/2000/svg" width="190" height="191" viewBox="0 0 190 191" fill="none">
-          <path d="M47.5 150.917L150.417 48M150.417 48V146.8M150.417 48H51.6167" stroke="white" stroke-width="3"
-                stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+</nav>
+
+<!-- Hero -->
+<header class="hero" id="top" #top>
+  <div class="container hero-inner">
+    <div class="hero-copy">
+      <h1 class="hero-title">Uncover<br>our burger<br><span>delights</span></h1>
+      <p class="hero-text">Fresh beef, open flame, brioche baked this morning. At your door in about 30 minutes.</p>
+      <button class="btn btn-yellow hero-btn" type="button" (click)="scrollTo(products)">
+        View menu <img [src]="assets + 'arrow-right.svg'" width="24" height="24" alt="">
       </button>
     </div>
+    <div class="hero-art" aria-hidden="true">
+      <div class="hero-art-box">
+        <img class="hero-ring" [src]="assets + 'hero-ring.svg'" width="680" height="680" alt="">
+        <img class="hero-disc" [src]="assets + 'hero-disc.svg'" width="620" height="620" alt="">
+        <div class="hero-cutout">
+          <div class="hero-photo" [style.mask-image]="'url(' + assets + 'hero-mask.svg)'"
+               [style.-webkit-mask-image]="'url(' + assets + 'hero-mask.svg)'">
+            <img [src]="assets + 'hero-photo.webp'" alt="">
+          </div>
+        </div>
+        <div class="tag tag-temp">
+          <b>400 °C</b>
+          <small>open-flame grill</small>
+        </div>
+        <div class="tag tag-rating">
+          <span class="faces">
+            <img [src]="assets + 'review-anna.webp'" alt="">
+            <img [src]="assets + 'review-tomasz.webp'" alt="">
+            <img [src]="assets + 'review-lena.webp'" alt="">
+          </span>
+          <span><b>4.9 ★</b><small>12 798 reviews</small></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="scallop" style="--top:var(--red);--bottom:var(--paper-light)"></div>
+
+<!-- What's inside -->
+<section class="inside" id="inside">
+  <div class="container">
+    <div class="sec-head">
+      <h2 class="sec-title">Every layer<br>has a reason</h2>
+      <p class="sec-text">
+        Our Classic, taken apart. <span class="only-desktop">Hover</span><span class="only-mobile">Tap</span>
+        a layer to see why it's there.
+      </p>
+    </div>
+    <div class="anatomy">
+      <div class="anatomy-box">
+        <img class="anatomy-img" [src]="assets + 'classic-burger.webp'" width="1536" height="1024"
+             alt="Cross-section of the Classic burger">
+        <ng-container *ngFor="let l of layers; let i = index">
+          <div class="callout" [class.left]="l.side === 'l'" [class.right]="l.side === 'r'" [class.on]="activeLayer === i"
+               [style.--y]="l.label[1]" [style.--line]="l.line" (mouseenter)="activeLayer = i">
+            <b>{{l.name}}</b>
+            <small>{{l.note}}</small>
+          </div>
+          <img class="leader" [class.left]="l.side === 'l'" [class.right]="l.side === 'r'" [style.--line]="l.line"
+               [src]="assets + 'leader.svg'" width="170" height="1.5" alt="">
+          <span class="dot" [class.left]="l.side === 'l'" [class.right]="l.side === 'r'" [class.on]="activeLayer === i"
+                [style.--line]="l.line"></span>
+        </ng-container>
+      </div>
+      <ol class="layer-list">
+        <li *ngFor="let l of layers; let i = index">
+          <button type="button" [class.on]="activeLayer === i" (click)="activeLayer = i">
+            <span class="num">{{i + 1}}</span>
+            <span><b>{{l.name}}</b><small>{{l.note}}</small></span>
+          </button>
+        </li>
+      </ol>
+    </div>
   </div>
 </section>
+<div class="scallop" style="--top:var(--paper-light);--bottom:var(--paper)"></div>
+
+<!-- Menu -->
+<section class="menu" id="menu" #products>
+  <div class="container">
+    <div class="sec-head">
+      <h2 class="sec-title">Choose your<br>burger</h2>
+      <div class="chips" role="group" aria-label="Filter menu">
+        <button *ngFor="let f of filters" type="button" class="chip" [class.on]="filter === f.id"
+                [attr.aria-pressed]="filter === f.id" (click)="filter = f.id">{{f.label}}</button>
+      </div>
+    </div>
+    <ul class="grid">
+      <li class="card" *ngFor="let p of visibleProducts">
+        <div class="card-pic">
+          <img [src]="assets + p.image" [alt]="p.title" loading="lazy">
+          <span class="badge" *ngIf="p.badge">{{p.badge}}</span>
+        </div>
+        <div class="card-title-row">
+          <h3>{{p.title}}</h3>
+          <small>{{p.grams}} g</small>
+        </div>
+        <p class="card-text">{{p.text}}</p>
+        <div class="card-buy">
+          <span class="price">{{money(p.price)}}</span>
+          <button class="add" type="button" (click)="addProduct(p)" [attr.aria-label]="'Add ' + p.title + ' to cart'">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+              <path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- Builder -->
+<section class="builder" id="build" #build>
+  <div class="container builder-inner">
+    <div class="stage" aria-live="polite">
+      <div class="stage-box">
+        <img class="stage-glow" [src]="assets + 'builder-glow.svg'" width="680" height="680" alt="">
+        <img class="stage-shadow" [src]="assets + 'builder-shadow.svg'" width="400" height="50" alt="">
+        <div class="stack">
+          <div class="ly ly-bun-bottom"></div>
+          <div *ngFor="let id of stack" class="ly" [ngClass]="'ly-' + id"></div>
+          <div class="ly ly-bun-top">
+            <img *ngFor="let s of sesame" [src]="assets + 'sesame.svg'" width="12" height="7" alt=""
+                 [style.--x]="s.x" [style.--y]="s.y" [style.--r]="s.r + 'deg'">
+          </div>
+        </div>
+        <div class="stats">
+          <span>Weight <b>{{builderTotals.grams}} g</b></span>
+          <span>Energy <b>{{spaced(builderTotals.kcal)}} kcal</b></span>
+        </div>
+      </div>
+    </div>
+    <div class="builder-copy">
+      <h2 class="sec-title">Stack it<br>your way</h2>
+      <p class="sec-text">Brioche bun is on us. Add layers and watch your burger grow. The price updates as you go.</p>
+      <ul class="ingredients">
+        <li class="ing" *ngFor="let ing of ingredients">
+          <span class="swatch" [style.background]="ing.color"></span>
+          <span class="ing-name">
+            <b>{{ing.name}}</b>
+            <small><span class="only-mobile">+${{ing.price.toFixed(2)}}, </span>{{ing.grams}} g, {{ing.kcal}} kcal</small>
+          </span>
+          <span class="ing-cost">+${{ing.price.toFixed(2)}}</span>
+          <span class="qty">
+            <button type="button" (click)="changeQty(ing, -1)" [disabled]="!ing.qty"
+                    [attr.aria-label]="'Remove ' + ing.name">−</button>
+            <output>{{ing.qty}}</output>
+            <button type="button" (click)="changeQty(ing, 1)" [disabled]="ing.qty >= maxQty"
+                    [class.accent]="!ing.qty" [attr.aria-label]="'Add ' + ing.name">+</button>
+          </span>
+        </li>
+      </ul>
+      <div class="total">
+        <div>
+          <small>Your burger</small>
+          <b>${{builderTotals.price.toFixed(2)}}</b>
+        </div>
+        <button class="btn btn-red" type="button" (click)="addCustomBurger()">Add to cart</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why us -->
+<section class="why" id="why" #why>
+  <div class="container">
+    <div class="sec-head">
+      <h2 class="sec-title">Made like<br>it matters</h2>
+      <p class="sec-text">No freezers, no heat lamps. Every order is grilled the moment you place it.</p>
+    </div>
+    <div class="bento">
+      <div class="tile tile-fire">
+        <div class="tile-fire-pic"><img [src]="assets + 'why-burger.webp'" alt="Double cheeseburger with bacon"></div>
+        <div class="tile-fire-copy">
+          <h3>Grilled over real fire</h3>
+          <p>Open flame at 400 °C gives the crust and smoky taste a flat-top can't.</p>
+        </div>
+      </div>
+      <div class="tile tile-red">
+        <span class="big">12k+</span>
+        <h3>Happy guests</h3>
+        <p>Rated 4.9 across 12 798 reviews.</p>
+      </div>
+      <div class="tile tile-white">
+        <span class="big">06:00</span>
+        <h3>Baked daily</h3>
+        <p>Brioche buns come out of our oven every morning.</p>
+      </div>
+      <div class="tile tile-yellow">
+        <span class="big">8</span>
+        <h3>House sauces</h3>
+        <p>From smoky BBQ to garlic aioli, all cooked in our kitchen with no preservatives.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="scallop" style="--top:var(--paper);--bottom:var(--green)"></div>
+
+<!-- How it works -->
+<section class="how" id="how" #how>
+  <div class="container">
+    <h2 class="sec-title">Four steps<br>to happy</h2>
+    <ol class="steps" #steps>
+      <li class="track" aria-hidden="true"><span [style.width]="stepFill()"></span></li>
+      <li class="step" [class.on]="activeStep >= 1">
+        <span class="step-num">1</span>
+        <div><h3>Build your order</h3><p>Pick burgers from the menu or stack your own in the builder.</p></div>
+      </li>
+      <li class="step" [class.on]="activeStep >= 2">
+        <span class="step-num">2</span>
+        <div><h3>Arrange delivery</h3><p>Choose delivery or pickup, a convenient time, and check the total.</p></div>
+      </li>
+      <li class="step" [class.on]="activeStep >= 3">
+        <span class="step-num">3</span>
+        <div><h3>Await a call</h3><p>An operator calls within 5 minutes to confirm the details.</p></div>
+      </li>
+      <li class="step" [class.on]="activeStep >= 4">
+        <span class="step-num">4</span>
+        <div><h3>Receive it hot</h3><p>Your order arrives fresh and hot, usually in about 30 minutes.</p></div>
+      </li>
+    </ol>
+  </div>
+</section>
+<div class="scallop" style="--top:var(--green);--bottom:var(--paper)"></div>
+
+<!-- Deal -->
+<section class="deal">
+  <div class="container">
+    <div class="deal-panel">
+      <div class="deal-copy">
+        <h2 class="deal-title">Red Dragon<br>combo</h2>
+        <p class="deal-text">Crispy chicken, double cheddar, jalapeños and a red brioche bun. Fries and a drink included. Today only.</p>
+        <div class="countdown" aria-label="Time left">
+          <div><b>{{countdown.h}}</b><small>hours</small></div>
+          <div><b>{{countdown.m}}</b><small>min</small></div>
+          <div><b>{{countdown.s}}</b><small>sec</small></div>
+        </div>
+        <div class="deal-buy">
+          <span class="deal-price">$9</span>
+          <s class="deal-old">$13</s>
+          <button class="btn btn-white" type="button" (click)="addDeal()">Grab the deal</button>
+        </div>
+      </div>
+      <img class="deal-img" [src]="assets + 'red-dragon.webp'" width="488" height="488" alt="Red Dragon burger">
+    </div>
+  </div>
+</section>
+
+<!-- Reviews -->
+<section class="reviews" aria-label="Reviews">
+  <div class="container">
+    <div class="sec-head">
+      <h2 class="sec-title">What guests<br>say about us</h2>
+      <div class="score">
+        <b>4.9</b>
+        <div><span class="stars">★★★★★</span><small>12 798 reviews</small></div>
+      </div>
+    </div>
+    <div class="review-cards">
+      <figure class="review">
+        <span class="stars">★★★★★</span>
+        <blockquote>"Ordered at 19:40, it arrived at 20:08 and was still hot. The Indiana is my new Friday ritual."</blockquote>
+        <figcaption><img [src]="assets + 'review-anna.webp'" alt=""><span><b>Anna K.</b><small>ordered Indiana Burger</small></span></figcaption>
+      </figure>
+      <figure class="review">
+        <span class="stars">★★★★★</span>
+        <blockquote>"Hunter's sausage in a burger sounded odd. It works, and the pretzel bun is the best part."</blockquote>
+        <figcaption><img [src]="assets + 'review-tomasz.webp'" alt=""><span><b>Tomasz M.</b><small>ordered Bavarian Burger</small></span></figcaption>
+      </figure>
+      <figure class="review">
+        <span class="stars">★★★★★</span>
+        <blockquote>"Built my own with double bacon and smoky sauce. The builder is genuinely fun to play with."</blockquote>
+        <figcaption><img [src]="assets + 'review-lena.webp'" alt=""><span><b>Lena S.</b><small>ordered a custom burger</small></span></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+<div class="scallop" style="--top:var(--paper);--bottom:var(--green)"></div>
+
+<!-- Delivery map -->
+<section class="find" id="find" #find>
+  <div class="container find-inner">
+    <div class="map" role="img" aria-label="Map of Warsaw with 12 Bun and Bite kitchens">
+      <div class="map-box">
+        <img class="map-roads" [src]="assets + 'map-roads.svg'" width="640" height="560" alt="">
+        <ng-container *ngFor="let k of kitchens">
+          <img class="kitchen-glow" [src]="assets + 'kitchen-glow.svg'" width="30" height="30" alt=""
+               [style.--x]="k.x" [style.--y]="k.y">
+          <img class="kitchen" [src]="assets + 'kitchen.svg'" width="14" height="14" alt=""
+               [style.--x]="k.x" [style.--y]="k.y">
+        </ng-container>
+        <span class="district" *ngFor="let d of districts" [style.--x]="d.x" [style.--y]="d.y">{{d.name}}</span>
+        <span class="you" [style.--x]="pin.x" [style.--y]="pin.y">You, {{district.name}}</span>
+      </div>
+    </div>
+    <div class="find-copy">
+      <h2 class="sec-title">All of Warsaw<br>in 30 minutes</h2>
+      <p class="sec-text">12 kitchens cover all 18 districts, so your order is always cooked close to you.</p>
+      <label class="field">
+        <span>Your district</span>
+        <span class="select">
+          <select (change)="selectDistrict($any($event.target).value)">
+            <option *ngFor="let d of districts" [value]="d.name" [selected]="d === district">{{d.name}}</option>
+          </select>
+          <img [src]="assets + 'chevron-down.svg'" width="20" height="20" alt="">
+        </span>
+      </label>
+      <div class="eta" aria-live="polite">
+        <div>
+          <b>~{{eta.min}} min</b>
+          <small><span class="only-desktop">Nearest kitchen</span><span class="only-mobile">Kitchen</span> on {{eta.street}}</small>
+        </div>
+        <div class="eta-fee">
+          <b>Free delivery</b>
+          <small><span class="only-desktop">on orders </span>from ${{freeDeliveryFrom}}</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="scallop" style="--top:var(--green);--bottom:var(--red)"></div>
+
+<!-- Footer -->
 <footer class="footer">
   <div class="container">
-    <div class="logo">
-      Bun & Bite
+    <div class="foot-cols">
+      <div class="foot-brand">
+        <a class="logo" href="#" (click)="$event.preventDefault(); scrollTo(top)">BUN <span>&amp;</span> BITE</a>
+        <p>Flame-grilled burgers, delivered hot across Warsaw.</p>
+      </div>
+      <div class="foot-links">
+        <h4>Information</h4>
+        <a href="#why" (click)="$event.preventDefault(); scrollTo(why)">Why choose us</a>
+        <a href="#menu" (click)="$event.preventDefault(); scrollTo(products)">Burger menu</a>
+        <a href="#how" (click)="$event.preventDefault(); scrollTo(how)">How it works</a>
+      </div>
+      <div class="foot-links">
+        <h4>Follow</h4>
+        <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://facebook.com" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://youtube.com" target="_blank" rel="noopener">YouTube</a>
+      </div>
+      <form class="foot-sub" (submit)="subscribe(email, $event)">
+        <h4>Get deals first</h4>
+        <div class="sub">
+          <label for="email" class="sr-only">Email</label>
+          <input id="email" #email type="email" placeholder="Your email" required>
+          <button type="submit">Subscribe</button>
+        </div>
+        <p class="sub-msg" *ngIf="subscribed">Subscribed. Watch your inbox for Friday deals.</p>
+      </form>
     </div>
-    <div class="right">All rights reserved</div>
+    <p class="mega" aria-hidden="true">BUN &amp; BITE</p>
+    <div class="legal">
+      <span>© 2026 Bun &amp; Bite. All rights reserved.</span>
+      <span class="legal-links"><a href="#">Privacy policy</a><a href="#">Contact us</a></span>
+    </div>
   </div>
 </footer>
+
+<!-- Cart -->
+<div class="scrim" [class.open]="cartOpen" (click)="cartOpen = false"></div>
+<aside class="drawer" [class.open]="cartOpen" aria-label="Cart" [attr.aria-hidden]="!cartOpen">
+  <header class="drawer-head">
+    <h3>Cart</h3>
+    <button class="close" type="button" (click)="cartOpen = false" aria-label="Close cart">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+        <path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </header>
+  <div class="drawer-items">
+    <p class="empty" *ngIf="!cart.length">Your cart is empty. Add a burger from the menu.</p>
+    <div class="it" *ngFor="let i of cart">
+      <span class="it-pic">
+        <img *ngIf="i.image" [src]="assets + i.image" alt="">
+        <span *ngIf="!i.image">B&amp;B</span>
+      </span>
+      <span class="it-info"><b>{{i.title}}</b><small>{{i.sub}}</small><small>{{money(i.price)}} each</small></span>
+      <span class="qty">
+        <button type="button" (click)="changeCartQty(i, -1)" aria-label="Fewer">−</button>
+        <output>{{i.qty}}</output>
+        <button type="button" (click)="changeCartQty(i, 1)" aria-label="More">+</button>
+      </span>
+    </div>
+  </div>
+  <form class="drawer-form" [formGroup]="form" (ngSubmit)="confirmOrder()" *ngIf="cart.length">
+    <input type="text" placeholder="Full name" formControlName="name" autocomplete="name"
+           [class.error]="form.get('name')?.invalid && form.get('name')?.touched">
+    <input type="tel" placeholder="Phone number" formControlName="phone" autocomplete="tel"
+           [class.error]="form.get('phone')?.invalid && form.get('phone')?.touched">
+    <textarea placeholder="Comment for the kitchen" formControlName="message" rows="2"></textarea>
+    <div class="sum"><span>Delivery</span><span>{{delivery ? money(delivery) : 'Free'}}</span></div>
+    <div class="sum sum-total"><span>Total</span><span>{{money(subtotal + delivery)}}</span></div>
+    <button class="btn btn-red" type="submit">Place order</button>
+  </form>
+</aside>
+<div class="toast" [class.show]="toastText" role="status">{{toastText}}</div>
